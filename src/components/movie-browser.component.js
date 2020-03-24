@@ -5,28 +5,33 @@ import axios from 'axios';
 
 export default function MovieBrowser(props) {
     const [ pageNumber, setPageNumber ] = useState(1);
-    const [ searchResults, setSearchResults ] = useState([]);
+    const [searchResults, setSearchResults] = useState([]);
+    const [searchSuccess, setSearchSuccess] = useState(false);
 
     const { searchValue } = useParams();
     const loadSearch = Boolean(props.default) ? props.default : searchValue;
 
     useEffect(() => {
-        axios.get('http://www.omdbapi.com/?apikey=7faebd98&s='+ loadSearch + '&page=' + pageNumber)
+        axios.get('http://www.omdbapi.com/?apikey=7faebd98&s=' + loadSearch + '&page=' + pageNumber)
             .then(response => {
-                setSearchResults(response.data.Search)
+                setSearchSuccess(response.data.Response === "True");
+                if (searchSuccess) {
+                    setSearchResults(response.data.Search);
+                }
             })
             .catch(error => console.log(error));
     });
 
     let movieStyles = {
-        flexBasis: '20%'
+        flex: '20%',
+        margin: '5em 0 5em 0'
     };
 
-    let results = searchResults.map(movie => (
+    let results = searchSuccess ? searchResults.map(movie => (
         <a href={'https://www.imdb.com/title/' + movie.imdbID} style={movieStyles} >
             {movie.Title}
         </a>        
-    ));
+    )) : (<h1> No Results </h1>);
 
     let containerStyles = {
         display: 'flex',
