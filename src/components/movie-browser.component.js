@@ -6,7 +6,6 @@ import axios from 'axios';
 export default function MovieBrowser(props) {
     const [ pageNumber, setPageNumber ] = useState(1);
     const [searchResults, setSearchResults] = useState([]);
-    const [searchSuccess, setSearchSuccess] = useState(false);
 
     const { searchValue } = useParams();
     const loadSearch = Boolean(props.default) ? props.default : searchValue;
@@ -14,10 +13,8 @@ export default function MovieBrowser(props) {
     useEffect(() => {
         axios.get('http://www.omdbapi.com/?apikey=7faebd98&s=' + loadSearch + '&page=' + pageNumber)
             .then(response => {
-                setSearchSuccess(response.data.Response === "True");
-                if (searchSuccess) {
-                    setSearchResults(response.data.Search);
-                }
+                const success = response.data.Response === "True";
+                setSearchResults(success ? response.data.Search : []);
             })
             .catch(error => console.log(error));
     });
@@ -27,10 +24,10 @@ export default function MovieBrowser(props) {
         margin: '5em 0 5em 0'
     };
 
-    let results = searchSuccess ? searchResults.map(movie => (
+    let results = Boolean(searchResults) ? searchResults.map(movie => (
         <a href={'https://www.imdb.com/title/' + movie.imdbID} style={movieStyles} >
             {movie.Title}
-        </a>        
+        </a>
     )) : (<h1> No Results </h1>);
 
     let containerStyles = {
