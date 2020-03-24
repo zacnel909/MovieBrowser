@@ -19,10 +19,7 @@ export default function MovieBrowser(props) {
             .catch(error => console.log(error));
     });
 
-    let movieStyles = {
-        flex: '20%',
-        margin: '5em 0 5em 0'
-    };
+
 
     let results = searchResults ? searchResults.map(movie => (
         <a href={'https://www.imdb.com/title/' + movie.imdbID} style={movieStyles} >
@@ -30,13 +27,7 @@ export default function MovieBrowser(props) {
         </a>
     )) : (<h1> No Results </h1>);
 
-    let containerStyles = {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        flexWrap: 'wrap',
-        textAlign: 'center'
-    };
+
 
     return (
         <div style={containerStyles}>
@@ -46,3 +37,17 @@ export default function MovieBrowser(props) {
         </div>
     );
 }
+
+//Styles
+let containerStyles = {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    textAlign: 'center'
+};
+
+let movieStyles = {
+    flex: '20%',
+    margin: '5em 0 5em 0'
+};

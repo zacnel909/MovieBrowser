@@ -14,9 +14,7 @@ function searchSubmit(event, searchValue) {
 function MyNavbar() {
     const [searchValue, setSearchValue] = useState('');
 
-    let searchStyles = {
-        width: '16em'
-    };
+
 
     return (
         <Navbar bg="dark" variant="dark">
@@ -43,5 +41,10 @@ function MyNavbar() {
         </Navbar>
     );
 }
+
+//Styles
+let searchStyles = {
+    width: '16em'
+};
 
 export default MyNavbar;
