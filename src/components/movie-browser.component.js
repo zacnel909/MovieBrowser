@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 
-import axios from 'axios';
-
 export default function MovieBrowser(props) {
     const [ pageNumber, setPageNumber ] = useState(1);
     const [searchResults, setSearchResults] = useState([]);
 
-    const { searchValue } = useParams();
-    const loadSearch = Boolean(props.default) ? props.default : searchValue;
+    const { searchValue = "default"} = useParams();
 
     useEffect(() => {
-        axios.get('http://www.omdbapi.com/?apikey=7faebd98&s=' + loadSearch + '&page=' + pageNumber)
-            .then(response => {
-                const success = response.data.Response === "True";
-                setSearchResults(success ? response.data.Search : []);
+        fetch('http://www.omdbapi.com/?apikey=7faebd98&s=' + searchValue + '&page=' + pageNumber)
+            .then((response) => {
+                return response.json();
+            })
+            .then(data => {
+                const success = data.Response === "True";
+                setSearchResults(success ? data.Search : []);
             })
             .catch(error => console.log(error));
     });
@@ -24,7 +24,7 @@ export default function MovieBrowser(props) {
         margin: '5em 0 5em 0'
     };
 
-    let results = Boolean(searchResults) ? searchResults.map(movie => (
+    let results = searchResults ? searchResults.map(movie => (
         <a href={'https://www.imdb.com/title/' + movie.imdbID} style={movieStyles} >
             {movie.Title}
         </a>
@@ -40,6 +40,8 @@ export default function MovieBrowser(props) {
 
     return (
         <div style={containerStyles}>
+
+            <br />
             {results}
         </div>
     );
