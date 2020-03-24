@@ -14,10 +14,10 @@ function App() {
                 <Navbar/>
                 <br />
                 <Router>
-                    <Route path="/" exact component={MovieBrowser} key="" />
-                    <Route path="/search/:searchValue" exact component={MovieBrowser} key="browser" />
-                    <Route path="/SelectedMovies" exact component={SelectedMovies} key="bookmarks" />
-                    <Route path="/MovieDetails" exact component={MovieDetails} key="movie" />
+                    <Route path="/" exact component={MovieBrowser} />
+                    <Route path="/search/:searchValue" exact component={MovieBrowser} />
+                    <Route path="/SelectedMovies" exact component={SelectedMovies} />
+                    <Route path="/MovieDetails" exact component={MovieDetails} />
                 </Router>
             </div>
         </div>
