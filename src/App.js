@@ -22,18 +22,21 @@ function App() {
         flexBasis: '90%'
     };
 
+    let landingPage = [(<MovieBrowser default="Bobby" key="default"/>)];
+
     return (
         <div className="App" style={rowStyles}>
             <div style={columnStyles}>
-                <Navbar />
+                <Navbar/>
                 <br />
                 <Router>
-                    <Route path="/" exact component={MovieBrowser} />
-                    <Route path="/SelectedMovies" exact component={SelectedMovies} />
-                    <Route path="/MovieDetails" exact component={MovieDetails}/>
+                    <Route path="/" exact render={() => landingPage} key="landing"/>
+                    <Route path="/search/:searchValue" exact component={MovieBrowser} key="browser" />
+                    <Route path="/SelectedMovies" exact component={SelectedMovies} key="bookmarks" />
+                    <Route path="/MovieDetails" exact component={MovieDetails} key="movie" />
                 </Router>
             </div>
-      </div>
+        </div>
     );
 }
 
