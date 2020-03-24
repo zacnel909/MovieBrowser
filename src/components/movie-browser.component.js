@@ -1,33 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from "react-router-dom";
+import React, { useState } from 'react';
 
-export default function MovieBrowser(props) {
+import useSearchResults from "../hooks/use-search-results";
+
+export default function MovieBrowser() {
     const [ pageNumber, setPageNumber ] = useState(1);
-    const [searchResults, setSearchResults] = useState([]);
 
-    const { searchValue = "default"} = useParams();
-
-    useEffect(() => {
-        fetch('http://www.omdbapi.com/?apikey=7faebd98&s=' + searchValue + '&page=' + pageNumber)
-            .then((response) => {
-                return response.json();
-            })
-            .then(data => {
-                const success = data.Response === "True";
-                setSearchResults(success ? data.Search : []);
-            })
-            .catch(error => console.log(error));
-    });
-
-
+    let searchResults = useSearchResults(pageNumber);
 
     let results = searchResults ? searchResults.map(movie => (
-        <a href={'https://www.imdb.com/title/' + movie.imdbID} style={movieStyles} >
+        <a href={'https://www.imdb.com/title/' + movie.imdbID} style={movieStyles} key={movie.imdbID} >
             {movie.Title}
         </a>
     )) : (<h1> No Results </h1>);
-
-
 
     return (
         <div style={containerStyles}>
