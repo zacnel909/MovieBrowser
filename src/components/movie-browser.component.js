@@ -1,37 +1,66 @@
 import React, { useState } from 'react';
 
+//import { FaFolderPlus } from 'react-icons/fa';
+
+import ResultsPagination from './results-pagination.component';
 import useSearchResults from "../hooks/use-search-results";
 
+
 export default function MovieBrowser() {
-    const [ pageNumber, setPageNumber ] = useState(1);
+    const [pageNum, setPageNum] = useState(1);
 
-    let searchResults = useSearchResults(pageNumber);
+    const [searchResults, numResults] = useSearchResults(pageNum);   
 
-    let results = searchResults ? searchResults.map(movie => (
-        <a href={'https://www.imdb.com/title/' + movie.imdbID} style={movieStyles} key={movie.imdbID} >
-            {movie.Title}
+    let browserContent = searchResults.length ? searchResults.map((movie, index) => (
+        <a target="_blank" href={'https://www.imdb.com/title/' + movie.imdbID} style={movieStyles} key={movie.imdbID + index + pageNum} >
+            <img src={movie.Poster != 'N/A' ? movie.Poster : defaultPoster} alt={movie.Title} key={'img' + movie.imdbID + index + pageNum} style={posterStyles} />
+            <span className="caption-text" style={captionTextStyles} >{movie.Title}</span>
         </a>
     )) : (<h1> No Results </h1>);
 
     return (
-        <div style={containerStyles}>
-
-            <br />
-            {results}
+        <div className="browser-component" style={containerStyles}>
+            <div className="results-container" style={resultStyles}>
+                {browserContent}
+            </div>
+            <ResultsPagination setPageNum={page => setPageNum(page)} pageNum={pageNum} numResults={numResults} />
         </div>
     );
 }
 
+//static variables
+const defaultPoster = 'https://www.reelviews.net/resources/img/default_poster.jpg';
+
 //Styles
 let containerStyles = {
     display: 'flex',
+    flexDirection: 'column',
+    maxHeight: '92%'
+};
+
+let resultStyles = {
+    display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'center',
     flexWrap: 'wrap',
-    textAlign: 'center'
+    textAlign: 'center',
+    justifyContent: 'space-evenly'
 };
 
 let movieStyles = {
-    flex: '20%',
-    margin: '5em 0 5em 0'
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    width: '17%',
+};
+
+let posterStyles = {
+    maxWidth: '80%',
+    maxHeight: '80%',
+    margin: '0 auto 0 auto'
+};
+
+let captionTextStyles = {
+    maxWidth: '80%',
+    color: 'black',
+    margin: '0 auto 0 auto'
 };

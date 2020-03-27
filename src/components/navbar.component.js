@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
+
 import Navbar from 'react-bootstrap/Navbar';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
+
 import { FaSearch } from 'react-icons/fa';
 
 function searchSubmit(event, searchValue) {
-    window.location = "/search/" + searchValue;
+    window.location = "/search?s=" + searchValue;
     event.preventDefault();
 }
 
@@ -34,7 +36,7 @@ function MyNavbar() {
                         onChange={event => setSearchValue(event.target.value)}
                     />
                 </Form>
-                <Button href={"/search/" + searchValue} variant="dark" className="search-button">
+                <Button href={"/search?s=" + searchValue} variant="dark" className="search-button">
                     <FaSearch />
                 </Button>
             </Navbar.Collapse>
