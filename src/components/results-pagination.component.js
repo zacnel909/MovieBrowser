@@ -7,7 +7,11 @@ import { FaAngleDoubleRight } from 'react-icons/fa';
 
 export default function ResultsPagination(props) {
     let buttons = [];
-    const numPages = Math.ceil(props.numResults / 10);
+    const numPages = Math.ceil(props.numResults / 20);
+
+    let disabledStyle = {
+        display : 'none'
+    };
 
     //Go to first page
     buttons.push(
@@ -38,7 +42,7 @@ export default function ResultsPagination(props) {
     );
 
     return (
-        <div style={groupStyles}>
+        <div className="pagination-group" style={numPages > 1 ? groupStyles : disabledStyle}>
             {buttons}
         </div>
     );
@@ -47,7 +51,7 @@ export default function ResultsPagination(props) {
 //<button style={buttonStyles} onClick={() => props.setPageNum()} disabled={isLastPage(props.pageNum, props.numResults)} >Next</button>
 
 function isLastPage(pageNum, numResults) {
-    return pageNum * 10 >= numResults;
+    return pageNum * 20 >= numResults;
 }
 
 //Styles

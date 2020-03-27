@@ -12,8 +12,8 @@ export default function MovieBrowser() {
     const [searchResults, numResults] = useSearchResults(pageNum);   
 
     let browserContent = searchResults.length ? searchResults.map((movie, index) => (
-        <a target="_blank" href={'https://www.imdb.com/title/' + movie.imdbID} style={movieStyles} key={movie.imdbID + index + pageNum} >
-            <img src={movie.Poster != 'N/A' ? movie.Poster : defaultPoster} alt={movie.Title} key={'img' + movie.imdbID + index + pageNum} style={posterStyles} />
+        <a target="_blank" rel="noopener noreferrer" href={'https://www.imdb.com/title/' + movie.imdbID} style={movieStyles} key={movie.imdbID + index + pageNum} >
+            <img src={movie.Poster === 'N/A' ? defaultPoster : movie.Poster} alt={movie.Title} key={'img' + movie.imdbID + index + pageNum} style={posterStyles} />
             <span className="caption-text" style={captionTextStyles} >{movie.Title}</span>
         </a>
     )) : (<h1> No Results </h1>);
@@ -43,14 +43,14 @@ let resultStyles = {
     flexDirection: 'row',
     flexWrap: 'wrap',
     textAlign: 'center',
-    justifyContent: 'space-evenly'
+    justifyContent: 'flex-start'
 };
 
 let movieStyles = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    width: '17%',
+    width: '20%',
 };
 
 let posterStyles = {
