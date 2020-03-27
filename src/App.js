@@ -15,7 +15,7 @@ function App() {
                 <Navbar />
                 <Router>
                     <Route path="/" exact >
-                        <Redirect to="/search?s=redirect" />
+                        <Redirect to="/search?s=default" />
                     </Route>
                     <Route path="/search" exact component={MovieBrowser} />
                     <Route path="/SelectedMovies" exact component={SelectedMovies} />

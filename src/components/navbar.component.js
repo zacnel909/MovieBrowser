@@ -8,6 +8,9 @@ import Button from 'react-bootstrap/Button';
 
 import { FaSearch } from 'react-icons/fa';
 
+
+const localStorage = window.localStorage;
+
 function searchSubmit(event, searchValue) {
     window.location = "/search?s=" + searchValue;
     event.preventDefault();
@@ -26,6 +29,7 @@ function MyNavbar() {
                 <Nav className="mr-auto">
                     <Nav.Link href="/">Browse</Nav.Link>
                     <Nav.Link href="/SelectedMovies">Your Selection</Nav.Link>
+                    <Button onClick={() => localStorage.clear()} > clear </Button>
                 </Nav>
                 <Form inline autoComplete="off" onSubmit={event => searchSubmit(event, searchValue)}>
                     <FormControl

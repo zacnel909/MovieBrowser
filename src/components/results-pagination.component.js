@@ -9,37 +9,37 @@ export default function ResultsPagination(props) {
     let buttons = [];
     const numPages = Math.ceil(props.numResults / 20);
 
-    let disabledStyle = {
-        display : 'none'
-    };
-
     //Go to first page
     buttons.push(
-        <button style={buttonStyles} onClick={() => props.setPageNum(1)} disabled={props.pageNum === 1}>
+        <button style={buttonStyles} onClick={() => props.setPageNum(1)} disabled={props.pageNum === 1} key="first">
             <FaAngleDoubleLeft />
         </button>
     );
 
     //Go to previous page
     buttons.push(
-        <button style={buttonStyles} onClick={() => props.setPageNum(props.pageNum - 1)} disabled={props.pageNum === 1}>
+        <button style={buttonStyles} onClick={() => props.setPageNum(props.pageNum - 1)} disabled={props.pageNum === 1} key="prev">
             <FaAngleLeft />
         </button>
     );
 
     //Go to next page
     buttons.push(
-        <button style={buttonStyles} onClick={() => props.setPageNum(props.pageNum + 1)} disabled={isLastPage(props.pageNum, props.numResults)}>
+        <button style={buttonStyles} onClick={() => props.setPageNum(props.pageNum + 1)} disabled={isLastPage(props.pageNum, props.numResults)} key="next">
             <FaAngleRight />
         </button>
     );
 
     //Go to last page
     buttons.push(
-        <button style={buttonStyles} onClick={() => props.setPageNum(numPages)} disabled={isLastPage(props.pageNum, props.numResults)}>
+        <button style={buttonStyles} onClick={() => props.setPageNum(numPages)} disabled={isLastPage(props.pageNum, props.numResults)} key="last">
             <FaAngleDoubleRight />
         </button>
     );
+
+    let disabledStyle = {
+        display: 'none'
+    };
 
     return (
         <div className="pagination-group" style={numPages > 1 ? groupStyles : disabledStyle}>

@@ -1,13 +1,21 @@
 import React from 'react';
 
-import Button from 'react-bootstrap/Button';
+const localStorage = window.localStorage;
 
 export default function SelectedMovies() {
+    const selection = JSON.parse(localStorage['userSelection']);
+    const titles = selection.map((title, index) => (        
+        <span key={title + index}> {title} </span>
+    ));
+
     return (
-        <div>
-            <h1> Selected Movies </h1>
-            <Button href="/"> Movie Browser </Button>
-            <Button href="/MovieDetails"> Movie Details </Button>
+        <div style={testStyles}>
+            {titles}
         </div>
     );
 }
+
+let testStyles = {
+    display: 'flex',
+    flexDirection: 'column'
+};
