@@ -5,7 +5,7 @@ export default function AddMovieButton(props) {
     const selected = Boolean(props.userSelection.filter(movie => movie.Title === props.movie.Title).length);
 
     const Icon = selected ? FaTimes : FaPlus;
-    const setSelection = () => props.setUserSelection(selected ? props.userSelection.filter(movie => movie.Title != props.movie.Title) : [props.movie, ...props.userSelection]);
+    const setSelection = () => props.setUserSelection(selected ? props.userSelection.filter(movie => !(movie.Title === props.movie.Title)) : [props.movie, ...props.userSelection]);
 
     let buttonStyles = {
         position: 'relative',
