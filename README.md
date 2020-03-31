@@ -22,16 +22,17 @@ You will also see any lint errors in the console.
 ## TODO
 
 ### Functionality
-Hover behavior for Movie Posters.<br />
-Component for empty user selection.
+Component for empty user selection.</br>
+Component for no results.</br>
+Component for movie details
 
 
 ### Styling
-Styling for poster buttons.<br />
-Styling for "No Results"<br />
+Movie poster hover behavior.<br />
+Poster button positioning and hover behavior<br />
 Themes using React context
 
 
 ### Code Maintenance
 Use [Prettier](https://prettier.io/) to format.<br />
-Styles will be moved from inline .js to sass files in production. Inline styles are convenient for development.
+Move styles from inline .js to sass files. Inline styles are convenient for development.
