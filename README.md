@@ -32,7 +32,7 @@ Restructure and generalize custom hooks for use in other projects.<br />
 ### Styling
 Movie poster hover behavior.<br />
 Poster button positioning and hover behavior<br />
-Themes using React context
+Themes using React context.<br />
 Improve layouts, themes, etc.
 
 ### Code Maintenance
