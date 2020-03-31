@@ -27,6 +27,7 @@ Component for no results.</br>
 Component for movie details.</br>
 Add logic to useLocalStorage hook to handle changing keys (no plan to use this but sounds nice).<br />
 Restructure and generalize custom hooks for use in other projects.<br />
+Catch JSON error.
 
 
 ### Styling
