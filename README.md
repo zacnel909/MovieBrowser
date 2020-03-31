@@ -25,8 +25,8 @@ You will also see any lint errors in the console.
 Component for empty user selection.</br>
 Component for no results.</br>
 Component for movie details.</br>
-Add logic to useLocalStorage hook to handle changing keys (no plan to use this but sounds nice).
-Restructure and generalize custom hooks for use in other projects.
+Add logic to useLocalStorage hook to handle changing keys (no plan to use this but sounds nice).<br />
+Restructure and generalize custom hooks for use in other projects.<br />
 
 
 ### Styling
@@ -37,5 +37,5 @@ Improve layouts, themes, etc.
 
 ### Code Maintenance
 Use [Prettier](https://prettier.io/) to format.<br />
-Simple documentation for custom hooks to increase reusability.
+Simple documentation for custom hooks to increase reusability.<br />
 Move styles from inline .js to sass files. Inline styles are convenient for development.
