@@ -1,4 +1,4 @@
-#Movie Browser
+# Movie Browser
 
 Demo React App, Movie Browser with search results from [OMDb API](http://www.omdbapi.com/).<br />
 User can search for movies and bookmark them to remember later.
