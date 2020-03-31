@@ -4,22 +4,28 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import Navbar from './components/navbar.component';
 import MovieBrowser from './components/movie-browser.component';
 import SelectedMovies from './components/selected-movies.component';
-import MovieDetails from './components/movie-details.component';
+
+import useLocalStorage from './hooks/use-local-storage';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
+    const [userSelection, setUserSelection] = useLocalStorage('userSelection', []);
+
     return (
         <div className="App" style={rowStyles}>
             <div style={columnStyles}>
-                <Navbar />
+                <Navbar userSelection={userSelection} />
                 <Router>
                     <Route path="/" exact >
-                        <Redirect to="/search?s=default" />
+                        <Redirect to="/search?s=space" />
                     </Route>
-                    <Route path="/search" exact component={MovieBrowser} />
-                    <Route path="/SelectedMovies" exact component={SelectedMovies} />
-                    <Route path="/MovieDetails" exact component={MovieDetails} />
+                    <Route path="/search" exact
+                        render={() => <MovieBrowser userSelection={userSelection} setUserSelection={setUserSelection} />}
+                    />
+                    <Route path="/SelectedMovies" exact
+                        render={() => <SelectedMovies userSelection={userSelection} setUserSelection={setUserSelection} />}
+                    />
                 </Router>
             </div>
         </div>

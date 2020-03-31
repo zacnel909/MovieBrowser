@@ -5,31 +5,25 @@ import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
+import Badge from 'react-bootstrap/Badge';
 
 import { FaSearch } from 'react-icons/fa';
 
-
-const localStorage = window.localStorage;
-
-function searchSubmit(event, searchValue) {
-    window.location = "/search?s=" + searchValue;
-    event.preventDefault();
-}
-
-function MyNavbar() {
+export default function MyNavbar(props) {
     const [searchValue, setSearchValue] = useState('');
-
-
+    const userSelection = props.userSelection;
 
     return (
-        <Navbar bg="dark" variant="dark">
+        <Navbar bg="dark" expand="lg" variant="dark">
             <Navbar.Brand href="/">Demo</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
                     <Nav.Link href="/">Browse</Nav.Link>
-                    <Nav.Link href="/SelectedMovies">Your Selection</Nav.Link>
-                    <Button onClick={() => localStorage.clear()} > clear </Button>
+                    <Nav.Link href="/SelectedMovies">
+                        Your Selection
+                        <Badge pill style={badgeStyles}> {userSelection.length} </Badge>
+                    </Nav.Link>
                 </Nav>
                 <Form inline autoComplete="off" onSubmit={event => searchSubmit(event, searchValue)}>
                     <FormControl
@@ -48,9 +42,22 @@ function MyNavbar() {
     );
 }
 
+//helpers
+function searchSubmit(event, searchValue) {
+    window.location = "/search?s=" + searchValue;
+    event.preventDefault();
+}
+
 //Styles
 let searchStyles = {
     width: '16em'
 };
 
-export default MyNavbar;
+let badgeStyles = {
+    position: 'relative',
+    bottom: '1em',
+    backgroundColor: '#dc3545'
+};
+
+//<Button onClick={() => setUserSelection('')} > clear </Button>
+//

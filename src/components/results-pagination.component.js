@@ -7,32 +7,37 @@ import { FaAngleDoubleRight } from 'react-icons/fa';
 
 export default function ResultsPagination(props) {
     let buttons = [];
-    const numPages = Math.ceil(props.numResults / 20);
+    const numPages = Math.ceil(props.numResults / 10);
+
+    function buttonClick(newPageNum) {
+        props.setPageNum(newPageNum);
+        window.scrollTo({ top: 0 });
+    }
 
     //Go to first page
     buttons.push(
-        <button style={buttonStyles} onClick={() => props.setPageNum(1)} disabled={props.pageNum === 1} key="first">
+        <button style={buttonStyles} onClick={() => buttonClick(1)} disabled={props.pageNum === 1} key="first">
             <FaAngleDoubleLeft />
         </button>
     );
 
     //Go to previous page
     buttons.push(
-        <button style={buttonStyles} onClick={() => props.setPageNum(props.pageNum - 1)} disabled={props.pageNum === 1} key="prev">
+        <button style={buttonStyles} onClick={() => buttonClick(props.pageNum - 1)} disabled={props.pageNum === 1} key="prev">
             <FaAngleLeft />
         </button>
     );
 
     //Go to next page
     buttons.push(
-        <button style={buttonStyles} onClick={() => props.setPageNum(props.pageNum + 1)} disabled={isLastPage(props.pageNum, props.numResults)} key="next">
+        <button style={buttonStyles} onClick={() => buttonClick(props.pageNum + 1)} disabled={isLastPage(props.pageNum, props.numResults)} key="next">
             <FaAngleRight />
         </button>
     );
 
     //Go to last page
     buttons.push(
-        <button style={buttonStyles} onClick={() => props.setPageNum(numPages)} disabled={isLastPage(props.pageNum, props.numResults)} key="last">
+        <button style={buttonStyles} onClick={() => buttonClick(numPages)} disabled={isLastPage(props.pageNum, props.numResults)} key="last">
             <FaAngleDoubleRight />
         </button>
     );
@@ -48,10 +53,9 @@ export default function ResultsPagination(props) {
     );
 }
 
-//<button style={buttonStyles} onClick={() => props.setPageNum()} disabled={isLastPage(props.pageNum, props.numResults)} >Next</button>
-
+//helpers
 function isLastPage(pageNum, numResults) {
-    return pageNum * 20 >= numResults;
+    return pageNum * 10 >= numResults;
 }
 
 //Styles

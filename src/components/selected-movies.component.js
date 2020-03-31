@@ -1,21 +1,37 @@
 import React from 'react';
 
-const localStorage = window.localStorage;
+import MovieContent from './movie-content.component';
 
-export default function SelectedMovies() {
-    const selection = JSON.parse(localStorage['userSelection']);
-    const titles = selection.map((title, index) => (        
-        <span key={title + index}> {title} </span>
-    ));
+export default function SelectedMovies(props) {
+    const [userSelection, setUserSelection] = [props.userSelection, props.setUserSelection];
+
+    const selectionContent = (<MovieContent content={userSelection} pageNum={1} userSelection={userSelection} setUserSelection={setUserSelection} />);
 
     return (
-        <div style={testStyles}>
-            {titles}
+        <div style={containerStyles}>
+            <div style={resultStyles}>
+                {selectionContent}
+            </div>
+            <button onClick={() => setUserSelection([])} style={buttonStyles} > Clear Selection </button>
         </div>
     );
 }
 
-let testStyles = {
+//Styles
+let containerStyles = {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+};
+
+let resultStyles = {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    textAlign: 'center',
+    justifyContent: 'flex-start'
+};
+
+let buttonStyles = {
+    width: '10em',
+    margin: '1em',
 };
